@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Brakes</title>
+  <link rel="stylesheet" href="style.css">
+    <script src="jss.js"></script>
+
+</head>
+<body>
+
+  <h1 id="gameTitle">NO BRAKES</h1>
+
+  <div id="menu">
+    <button id="startBtn">START GAME</button>
+    
+    <ul id="rules">
+<li> Use Arrow Keys or WASD to move.</li>
+<li> Avoid obstacles — pick red dots for +10 points.</li>   
+  <li> Complete 3 levels to unlock Sandbox Mode.</li>
+      <li>Good luck :]</li>
+    </ul>
+  </div>
+
+  <!-- Game wrapper to allow overlays -->
+  <div id="gameWrapper">
+      <canvas id="gameCanvas" width="600" height="600"></canvas>
+
+      <!-- OVERLAY for level complete / loss -->
+      <div id="endScreen">
+        <h2 id="endMessage"></h2>
+
+        <button id="restartB">Restart</button>
+        <button id="sandboxB">Sandbox Mode</button>
+      </div>
+  </div>
+
+  <div id="levelInfo"></div>
+
+</body>
+</html>
