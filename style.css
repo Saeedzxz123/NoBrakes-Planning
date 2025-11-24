@@ -1,0 +1,33 @@
+#player {
+    width: 20px;
+    height: 20px;
+    background: rgb(30, 14, 14);
+    position: absolute; 
+    border: 1px solid gray;
+    
+
+}
+
+#gameArea {
+    width: 600px;       
+    height: 400px;   
+    border: 3px solid black;
+    background: lightgray;
+    position: relative; 
+    overflow: hidden;   
+}
+#score {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+}
+
+
+#pointBox {
+    width: 8px;
+    height: 8px;
+    background: red;
+    position: absolute;
+    border-radius: 5px;
+}

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>No Brakes</title>
   <link rel="stylesheet" href="style.css">
-    <script src="jss.js"></script>
+   
 
 </head>
 <body>
@@ -13,28 +13,40 @@
   <h1 id="gameTitle">NO BRAKES</h1>
 
   <div id="menu">
-    <button id="startBtn">START GAME</button>
+<!--     <button id="startBtn">START GAME</button>    -->    
     
+  <div id="score">score:000</div>
+
+  <div id="levelInfo">level 1</div>
+
+    
+  <div id="gameArea">
+  <div id="player"></div>
+  <div id="pointBox"></div>
+  <div id="enemyBox"></div>
+</div>
+
+
     <ul id="rules">
 <li> Use Arrow Keys or WASD to move.</li>
 <li> Avoid obstacles — pick red dots for +10 points.</li>   
   <li> Complete 3 levels to unlock Sandbox Mode.</li>
       <li>Good luck :]</li>
     </ul>
-  </div>
+ 
+  
 
-  <div id="gameWrapper">
-      <canvas id="gameCanvas" width="600" height="600"></canvas>
 
-      <div id="endScreen">
-        <h2 id="endMessage"></h2>
+      <div id="lossScreen">
+        <h2 id="lossMessage"></h2> 
+          </div>
 
         <button id="restartB">Restart</button>
         <button id="sandboxB">Sandbox Mode</button>
-      </div>
+     </div>
   </div>
 
-  <div id="levelInfo"></div>
+   <script src="jss.js"></script>
 
 </body>
 </html>
