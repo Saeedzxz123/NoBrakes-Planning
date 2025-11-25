@@ -1,7 +1,7 @@
 #player {
     width: 20px;
     height: 20px;
-    background: rgb(30, 14, 14);
+    background: rgb(6, 165, 51);
     position: absolute; 
     border: 1px solid gray;
     
@@ -30,4 +30,16 @@
     background: red;
     position: absolute;
     border-radius: 5px;
+}
+
+
+
+
+#enemyBox {
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    position: absolute;
+    border-radius: 1px;
+
 }

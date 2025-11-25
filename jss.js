@@ -3,32 +3,39 @@ const player = document.getElementById("player");
 const restart = document.getElementById('restartB')
 const gameArea = document.getElementById("gameArea");
 const pointBox = document.getElementById("pointBox");
+const start = document.getElementById("start");
+const sandbox = document.getElementById("sandboxB");
+const enemy = document.getElementById("enemyBox");
 
 
-
-
+ let gamePaused = true; 
+ 
+let level = 1;
 
 const levelScore = {
     1:150,
     2:300,
-    3:600
-
-}
+    3:600,
+};
 
 
 let score = 0;
 
-
+// player 
 let x = 300;  
 let y = 200;  
-const speed = 5; 
+let speed = 5; 
 
-let dx =0;
-let dy =0;
+let directionX  =0;
+let directionY =0;
 
 
-/* document.addEventListener('click',)
- */ 
+
+
+document.getElementById("start").onclick = () => {
+    gamePaused = false;     
+    document.getElementById("start").style.display = "none"; 
+};
 
 
 document.addEventListener("keydown", (event) => {
@@ -36,30 +43,31 @@ document.addEventListener("keydown", (event) => {
 
 
     if (key === "w"  || key === 'arrowup') {  
-        dx = 0;
-        dy = -speed;
+        directionX = 0;
+        directionY = -1;
     }
     if (key === "s" || key === 'arrowdown') {  
-        dx = 0;
-        dy = speed;
+        directionX = 0;
+        directionY = 1;
     }
     if (key === "a" || key === 'arrowleft') {  
-        dx = -speed;
-        dy = 0;
+        directionX = -1;
+        directionY = 0;
     }
     if (key === "d" || key === 'arrowright') {  
-        dx = speed;
-        dy = 0;
+        directionX = 1;
+        directionY = 0;
     }
     
 });
 
 function gameLoop() {
-    x += dx;
-    y += dy;
+/*     if(!gamePaused){ */ 
+    x += directionX * speed;
+    y += directionY * speed;
 
-   
-       
+
+
 
 
     player.style.left = x + "px";
@@ -68,18 +76,50 @@ function gameLoop() {
     
     checkPointBoxCollision()
     requestAnimationFrame(gameLoop);
+    checkLevelUp();
+    }
+
+function checkLevelUp() {
+    if (score >= levelScore[level]) {
+
+        level ++;
+        speed += 3;     
+
+        document.getElementById("levelInfo").innerText = "Level " + level;
+
+        if (level > 3) {
+            document.getElementById("levelInfo").innerText = "All levels completd";
+        
+        }
+    }
 }
+
+
 
 gameLoop();
 
 setInterval(() => {
-    if (dx !== 0 || dy !== 0) {  
+    if (directionX !== 0 || directionY !== 0) {  
         score ++;               
         document.getElementById("score").innerText = "Score: " + score;
     }
-}, 500); 
+}, 100);  
 
 
+
+
+function spawnEnemy() {
+    const areaWidth = gameArea.clientWidth;
+    const areaHeight = gameArea.clientHeight;
+
+    const boxSize = 40;
+
+    const randomX = Math.floor(Math.random() * (areaWidth - boxSize - 20));
+    const randomY = Math.floor(Math.random() * (areaHeight - boxSize - 20));
+
+    enemy.style.left = randomX + "px";
+    enemy.style.top = randomY + "px";
+}
 
 
 
@@ -92,8 +132,8 @@ function spawnPointBox() {
 
     const boxSize = 8;
 
-    const randomX = Math.floor(Math.random() * (areaWidth - boxSize));
-    const randomY = Math.floor(Math.random() * (areaHeight - boxSize));
+    const randomX = Math.floor(Math.random() * (areaWidth - boxSize - 20));
+    const randomY = Math.floor(Math.random() * (areaHeight - boxSize - 20));
 
     pointBox.style.left = randomX + "px";
     pointBox.style.top = randomY + "px";
@@ -103,11 +143,10 @@ function spawnPointBox() {
 function checkPointBoxCollision() {
     const p = player.getBoundingClientRect();
     const b = pointBox.getBoundingClientRect();
-    // console.log( 'p: ' + p.left)
-    // console.log(b.right)
+
 
     if (
-         p.left < b.right &&
+        p.left < b.right &&
         p.right > b.left &&
         p.top < b.bottom &&
         p.bottom > b.top
@@ -122,9 +161,7 @@ function checkPointBoxCollision() {
 
 spawnPointBox();
 
-  
-
-
+spawnEnemy();
 
 
 
