@@ -8,8 +8,8 @@ const sandbox = document.getElementById("sandboxB");
 const enemy = document.getElementById("enemyBox");
 
 
- let gamePaused = true; 
- 
+/*  let gamePaused = true; 
+ */ 
 let level = 1;
 
 const levelScore = {
@@ -31,11 +31,11 @@ let directionY =0;
 
 
 
-
+/* 
 document.getElementById("start").onclick = () => {
     gamePaused = false;     
     document.getElementById("start").style.display = "none"; 
-};
+}; */
 
 
 document.addEventListener("keydown", (event) => {
