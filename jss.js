@@ -1,5 +1,5 @@
 const player = document.getElementById("player");
-const restart = document.getElementById("restartB");
+const restartb = document.getElementById("restartB");
 const gameArea = document.getElementById("gameArea");
 const pointBox = document.getElementById("pointBox");
 const enemy = document.getElementById("enemyBox");
@@ -13,35 +13,47 @@ const levelScore = {
     3: 600
 };
 
-//  movement
+
+//  player
 let x = 300;
 let y = 200;
 let speed = 5;
 
 let directionX = 0;
 let directionY = 0;
+let canMove = true;  
 
 let gameOver = false;
+let gamePause = false;
 
+
+// movment
 document.addEventListener("keydown", (event) => {
+    if (!canMove) return;   
+
     const key = event.key.toLowerCase();
 
     if (key === "w" || key === "arrowup") {
-        directionX = 0; directionY = -1;
+        directionX = 0;
+        directionY = -1;
     }
     if (key === "s" || key === "arrowdown") {
-        directionX = 0; directionY = 1;
+        directionX = 0;
+        directionY = 1;
     }
     if (key === "a" || key === "arrowleft") {
-        directionX = -1; directionY = 0;
+        directionX = -1;
+        directionY = 0;
     }
     if (key === "d" || key === "arrowright") {
-        directionX = 1; directionY = 0;
+        directionX = 1;
+        directionY = 0;
     }
 });
 
+
 function gameLoop() {
-    if (!gameOver) {
+    if (!gameOver && !gamePause) {
         x += directionX * speed;
         y += directionY * speed;
 
@@ -59,16 +71,37 @@ function gameLoop() {
 
 function checkLevelUp() {
     if (score >= levelScore[level]) {
+
+        gamePause = true;
+        canMove = false;   
+
+        directionX = 0;
+        directionY = 0;
+
+        document.getElementById("levelInfo").innerText =
+        "Level " + level + " completed!";
+
         level++;
         speed += 3;
 
-        document.getElementById("levelInfo").innerText = "Level " + level;
-
         if (level > 3) {
-            document.getElementById("levelInfo").innerText = "All levels completed!";
+            document.getElementById("levelInfo").innerText =
+            "All levels completed!";
         }
+
+        document.getElementById("continueB").style.display = "block";
     }
 }
+
+
+
+document.getElementById("continueB").onclick = () => {
+    canMove = true;    
+    gamePause = false; 
+    document.getElementById("continueB").style.display = "none";
+};
+
+
 
 setInterval(() => {
     if (!gameOver) {
@@ -137,8 +170,57 @@ function checkWallCollision() {
 function loseGame(reason) {
     gameOver = true;
     document.getElementById("levelInfo").innerText = reason + " — Game Over!";
+            document.getElementById("restartB").style.display = "block";
+
 }
+
+
+
 
 spawnPointBox();
 spawnEnemy();
 gameLoop();
+
+
+
+function restartGame() {
+
+
+    x = 300;
+    y = 200;
+    speed = 5;
+
+    directionX = 0;
+    directionY = 0;
+    canMove = true;  
+
+    gameOver = false;
+    gamePause = false;
+
+    score = 0;
+    level = 1;
+    speed = 5;
+
+
+
+
+    document.getElementById("score").innerText = "Score: 0";
+    document.getElementById("levelInfo").innerText = "Level 1";
+
+    document.getElementById("continueB").style.display = "none";
+    document.getElementById("lossScreen").style.display = "none";
+
+    spawnPointBox();
+    spawnEnemy();
+    
+
+    
+}
+
+
+restartb.onclick = () => {
+    restartGame();
+};
+
+
+
