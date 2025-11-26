@@ -3,7 +3,7 @@ const restartb = document.getElementById("restartB");
 const gameArea = document.getElementById("gameArea");
 const pointBox = document.getElementById("pointBox");
 const enemy = document.getElementById("enemyBox");
-
+const sandBox =document.getElementById('sandBoxB')
 let level = 1;
 let score = 0;
 
@@ -23,6 +23,7 @@ let directionX = 0;
 let directionY = 0;
 let canMove = true;  
 
+let sandBoxs = false;
 let gameOver = false;
 let gamePause = false;
 
@@ -64,6 +65,7 @@ function gameLoop() {
         checkEnemyCollision();
         checkPointBoxCollision();
         checkLevelUp();
+        
     }
 
     requestAnimationFrame(gameLoop);
@@ -71,7 +73,7 @@ function gameLoop() {
 
 function checkLevelUp() {
     if (score >= levelScore[level]) {
-
+        
         gamePause = true;
         canMove = false;   
 
@@ -80,18 +82,21 @@ function checkLevelUp() {
 
         document.getElementById("levelInfo").innerText =
         "Level " + level + " completed!";
-
+        
+                document.getElementById("continueB").style.display = "block";
+        
         level++;
         speed += 3;
+        
+ }
 
-        if (level > 3) {
+    if (level > 3) {
             document.getElementById("levelInfo").innerText =
             "All levels completed!";
         }
 
-        document.getElementById("continueB").style.display = "block";
     }
-}
+
 
 
 
@@ -99,29 +104,44 @@ document.getElementById("continueB").onclick = () => {
     canMove = true;    
     gamePause = false; 
     document.getElementById("continueB").style.display = "none";
-};
+        if (level > 3) { document.getElementById("levelInfo").innerText =
+            "limetless mode";
+}
+        spawnPointBox();
+        spawnEnemy();   
 
-
-
+}
 setInterval(() => {
     if (!gameOver) {
         if (directionX !== 0 || directionY !== 0) {
             score++;
             document.getElementById("score").innerText = "Score: " + score;
+           
         }
     }
 }, 10);
 
 // SPAWN 
 function spawnEnemy() {
-    const areaW = gameArea.clientWidth;
-    const areaH = gameArea.clientHeight;
-
+    const box = document.getElementById("enemyBox");
+    const areaW = box.clientWidth;
+    const areaH = box.clientHeight;
     const size = 40;
 
-    enemy.style.left = Math.random() * (areaW - size) + "px";
-    enemy.style.top = Math.random() * (areaH - size) + "px";
+    for (let i = 0; i < 5; i++) {
+
+
+        const enemy = document.createElement("div");
+        enemy.classList.add("enemy");
+
+        enemy.style.left = Math.random() * (areaW - size) + "px";
+        enemy.style.top = Math.random() * (areaH - size) + "px";
+
+        box.appendChild(enemy);
+    }
 }
+
+
 
 function spawnPointBox() {
     const areaW = gameArea.clientWidth;
@@ -132,6 +152,8 @@ function spawnPointBox() {
     pointBox.style.left = Math.random() * (areaW - size) + "px";
     pointBox.style.top = Math.random() * (areaH - size) + "px";
 }
+
+
 
 
 function checkPointBoxCollision() {
@@ -154,6 +176,7 @@ function checkEnemyCollision() {
         loseGame("You hit the enemy!");
     }
 }
+
 
 function checkWallCollision() {
     const areaW = gameArea.clientWidth;
@@ -178,7 +201,7 @@ function loseGame(reason) {
 
 
 spawnPointBox();
-spawnEnemy();
+spawnEnemy();  
 gameLoop();
 
 
@@ -216,6 +239,16 @@ function restartGame() {
 
     
 }
+
+
+document.getElementById("sandBoxB").onclick = () => {
+    canMove = true;    
+    gamePause = false; 
+    restartGame()
+    document.getElementById("sandBoxB").style.display = "none";
+};
+
+
 
 
 restartb.onclick = () => {
