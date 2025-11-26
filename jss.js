@@ -125,7 +125,7 @@ setInterval(() => {
             document.getElementById("score").innerText = "Score: " + score;
         }
     }
-}, 10);
+}, 300);
 
 function spawnEnemy() {
     const areaW = gameArea.clientWidth;
