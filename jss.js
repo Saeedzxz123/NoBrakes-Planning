@@ -5,9 +5,6 @@ const pointBox = document.getElementById("pointBox");
 const sandBox = document.getElementById("sandBoxB");
 const boxEnemy = document.getElementById("enemyBox");
 
-let level = 1;
-let score = 0;
-
 const levelScore = {
     1: 150,
     2: 300,
@@ -18,6 +15,9 @@ let x = 300;
 let y = 200;
 let speed = 5;
 
+let level = 1;
+let score = 0;
+
 let directionX = 0;
 let directionY = 0;
 let canMove = true;
@@ -26,7 +26,7 @@ let gameOver = false;
 let gamePause = false;
 
 let limitless = false;
-let speedBoostInterval = null;
+let speedInterval = null;
 
 document.addEventListener("keydown", (event) => {
     if (!canMove) return;
@@ -111,7 +111,7 @@ document.getElementById("continueB").onclick = () => {
 
         speedInterval = setInterval(() => {
             speed *= 1.10;
-        }, 2000);
+        }, 3000);
     }
 
     spawnPointBox();
@@ -210,7 +210,7 @@ function loseGame(reason) {
 
     document.getElementById("restartB").style.display = "block";
 
-    if (speedBoostInterval) clearInterval(speedBoostInterval);
+    if (speedInterval) clearInterval(speedInterval);
 }
 
 spawnPointBox();
@@ -218,9 +218,13 @@ spawnEnemy();
 gameLoop();
 
 function restartGame() {
+
 x = 300;
 y = 200;
 speed = 5;
+
+level = 1;
+score = 0;
 
 directionX = 0;
 directionY = 0;
@@ -229,25 +233,19 @@ canMove = true;
 gameOver = false;
 gamePause = false;
 
-
 limitless = false;
-speedBoostInterval = null;
+speedInterval = null;
 
     document.getElementById("score").innerText = "Score: 0";
     document.getElementById("levelInfo").innerText = "Level 1";
 
-    if (speedBoostInterval) clearInterval(speedBoostInterval);
+
+    document.getElementById("restartB").style.display = "none";
 
     spawnPointBox();
     spawnEnemy();
-}
-
-sandBox.onclick = () => {
-    canMove = true;
-    gamePause = false;
-    restartGame();
-    sandBox.style.display = "none";
 };
+
 
 restartb.onclick = () => {
     restartGame();
