@@ -23,21 +23,19 @@ Getting started :-
 User story:-
 1. The game name will be in the top center off the screen.
 
-2. when the user enter the website he will find the game name and the start button on the center off the screen and the rules under the start button.
+2. when the user enter the website he will find the game name and when hit any off the playable button the game will start.
 
-3. when the user click start the game will render and replace the start button and the rules. 
+3. there will be a spot or square represent the player and a randomly placed enemy boxes.
 
-4. there will be a spot or square represent the player and a randomly placed shapes.
+4. then the player press any off the playable keys the game will start and the spot will move on the direction the player press.
 
-5. then the player press any off the playable keys the game will start and the spot will move on the direction the player press.
+5. the player need to pick the direction so the spot don't hit any off the objects or he/she will lose.
 
-6. the player need to pick the direction so the spot don't hit any off the objects or he/she will lose.
+6. the score will keep increasing intel the player loss.
 
-7. the score will keep increasing intel the player loss.
+7. when the player loss the game will freeze and the text 'you loss' will show to the player on the screen with the score he git.
 
-8. when the player loss the game will freeze and the text 'you loss' will show to the player on the screen with the score he git.
-
-9. the game will have red spot spawning in the map randomly and when the player pick them up to get 10 extra score point.
+8. the game will have red spot spawning in the map randomly and when the player pick them up to get 10 extra score point.
 
 mockup
 ![alt text](<NO Brakes (1).png>)
